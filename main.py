@@ -1,22 +1,8 @@
-import os
-from openai import OpenAI
+import openai
+import sys
 
-# # 환경 변수에서 API 키 로드
-# api_key = os.getenv("OPENAI_API_KEY")
-
-# # API 키 확인을 위한 디버깅 출력
-# print(f"Loaded API Key: {api_key}")
-
-# if not api_key:
-#     raise ValueError(
-#         "API 키를 찾을 수 없습니다. OPENAI_API_KEY 환경 변수를 설정하세요."
-#     )
-
-# # OpenAI 클라이언트 초기화 (API 키 설정)
-# client = OpenAI(api_key=api_key)
-
-# OpenAI 클라이언트 초기화 (API 키 설정)
-client = OpenAI(api_key="")
+# API 키 설정
+openai.api_key = ""
 
 # '법률 챗봇'의 시스템 메시지 설정
 instruction = """
@@ -55,16 +41,18 @@ Example Responses:
 "더 자세한 정보가 필요하다면, 노동부 또는 가까운 법무법인에 문의하시기 바랍니다."
 """
 
-response = client.chat.completions.create(
-    model="ft:gpt-3.5-turbo-0125:personal:colaw-fine-tuned-model:A16Q5ZJe",
+# 사용자의 질문을 커맨드 라인 인자로부터 받기
+if len(sys.argv) > 1:
+    user_question = sys.argv[1]
+else:
+    user_question = "질문을 입력해주세요."
+
+response = openai.ChatCompletion.create(
+    model="ft:gpt-3.5-turbo-0125:personal:colaw-fine-tuned-model:AGmT2AZX",
     messages=[
         {"role": "system", "content": instruction},
-        {
-            "role": "user",
-            "content": """ 제 근로 계약서에 명시된 근무 시간과 실제 근무 시간이 다를 때 어떻게 해야 하나요?
-        """,
-        },
+        {"role": "user", "content": user_question},
     ],
 )
 
-print(response.choices[0].message.content.strip())
+print(response["choices"][0]["message"]["content"].strip())

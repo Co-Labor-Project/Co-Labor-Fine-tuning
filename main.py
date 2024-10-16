@@ -48,7 +48,7 @@ else:
     user_question = "질문을 입력해주세요."
 
 response = openai.ChatCompletion.create(
-    model="ft:gpt-3.5-turbo-0125:personal:colaw-fine-tuned-model:AGmT2AZX",
+    model="ft:gpt-3.5-turbo-0125:personal:colaw-fine-tuned-model:AHAkx7ds",
     messages=[
         {"role": "system", "content": instruction},
         {"role": "user", "content": user_question},

@@ -1,0 +1,4 @@
+{
+  "json.trace.server": "verbose",
+  "json.validate.enable": false
+}

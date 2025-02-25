@@ -54,7 +54,7 @@ client = OpenAI(api_key="")
 try:
     # (1) 파일을 미리 OpenAI 플랫폼에 업로드한 후 해당 파일 ID를 사용
     training_file_id = (
-        "file-1QvFCihv7WRyNo5E75Qf2zed"  # 여기에 실제 파일 ID를 입력하세요
+        "file-8jxKYMbBgPPMWFqzdSMif8"  # 여기에 실제 파일 ID를 입력하세요
     )
     print(f"Using uploaded file ID: {training_file_id}")
 
